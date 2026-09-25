@@ -1,0 +1,162 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Dashboard | Admin Brew's Origin{% endblock %}
+{% block section_name %}Ringkasan Sistem{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Top Action & Welcome -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+            <h1 class="font-bebas text-4xl text-cream-50">SELAMAT DATANG, {{ session.get('admin_user', 'ADMIN') }}</h1>
+            <p class="text-xs text-cream-300">Ringkasan inventori biji kopi, artikel edukasi, dan permintaan sample B2B roastery.</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="{{ url_for('admin_bean_new') }}" class="btn-primary px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow">
+                <i class="fa-solid fa-plus text-forest-950"></i> Tambah Biji Kopi
+            </a>
+            <a href="{{ url_for('admin_blog_new') }}" class="bg-forest-900 hover:bg-forest-800 text-cream-200 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 border border-forest-700">
+                <i class="fa-solid fa-pen-nib text-gold-400"></i> Tulis Blog
+            </a>
+        </div>
+    </div>
+
+    <!-- Stat Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Stat 1: Total Beans -->
+        <div class="p-5 rounded-2xl bg-forest-900 border border-forest-800 flex items-center justify-between">
+            <div>
+                <span class="text-[11px] font-bold text-cream-300 uppercase tracking-wider">Total Biji Kopi</span>
+                <div class="font-bebas text-4xl text-cream-50 mt-1">{{ total_beans }} Varian</div>
+                <span class="text-[10px] text-gold-400 font-semibold">{{ arabica_count }} Arabika &bull; {{ robusta_count }} Robusta</span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-forest-800 text-gold-400 flex items-center justify-center text-xl border border-forest-700">
+                <i class="fa-solid fa-cubes-stacked"></i>
+            </div>
+        </div>
+
+        <!-- Stat 2: Arabika Specialty -->
+        <div class="p-5 rounded-2xl bg-forest-900 border border-forest-800 flex items-center justify-between">
+            <div>
+                <span class="text-[11px] font-bold text-cream-300 uppercase tracking-wider">Arabika Specialty</span>
+                <div class="font-bebas text-4xl text-gold-400 mt-1">{{ arabica_count }}</div>
+                <span class="text-[10px] text-cream-400">SCA Score 85+</span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-forest-800 text-gold-400 flex items-center justify-center text-xl border border-forest-700">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+        </div>
+
+        <!-- Stat 3: Fine Robusta -->
+        <div class="p-5 rounded-2xl bg-forest-900 border border-forest-800 flex items-center justify-between">
+            <div>
+                <span class="text-[11px] font-bold text-cream-300 uppercase tracking-wider">Fine Robusta</span>
+                <div class="font-bebas text-4xl text-emerald-400 mt-1">{{ robusta_count }}</div>
+                <span class="text-[10px] text-cream-400">High Crema & Sweetness</span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-forest-800 text-emerald-400 flex items-center justify-center text-xl border border-forest-700">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+        </div>
+
+        <!-- Stat 4: Permintaan Sample -->
+        <div class="p-5 rounded-2xl bg-forest-900 border border-forest-800 flex items-center justify-between">
+            <div>
+                <span class="text-[11px] font-bold text-cream-300 uppercase tracking-wider">Request Sample B2B</span>
+                <div class="font-bebas text-4xl text-cream-50 mt-1">{{ total_samples }}</div>
+                <span class="text-[10px] text-emerald-400 font-semibold">Terekam di Database</span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-forest-800 text-emerald-300 flex items-center justify-center text-xl border border-forest-700">
+                <i class="fa-solid fa-inbox"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Beans & Recent Samples Split -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Recent Beans Table (7 Cols) -->
+        <div class="lg:col-span-7 bg-forest-900 border border-forest-800 rounded-2xl p-6 shadow-md">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bebas text-2xl text-cream-50">KATALOG BIJI KOPI TERBARU</h3>
+                <a href="{{ url_for('admin_beans') }}" class="text-xs font-semibold text-gold-400 hover:underline">
+                    Lihat Semua &rarr;
+                </a>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="border-b border-forest-800 text-cream-400 uppercase tracking-wider text-[10px]">
+                            <th class="pb-3">Nama Biji Kopi</th>
+                            <th class="pb-3">Jenis</th>
+                            <th class="pb-3">Origin / Ketinggian</th>
+                            <th class="pb-3">Score</th>
+                            <th class="pb-3 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-forest-800/80">
+                        {% for bean in recent_beans %}
+                            <tr class="hover:bg-forest-800/50 transition-colors">
+                                <td class="py-3 font-semibold text-cream-100">
+                                    <div class="flex items-center gap-2">
+                                        <img src="{{ bean.image_url }}" alt="" class="w-7 h-7 rounded-lg object-cover border border-forest-800">
+                                        <span class="truncate max-w-[180px]">{{ bean.name }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3">
+                                    {% if bean.category == 'Arabika' %}
+                                        <span class="badge-arabica px-2 py-0.5 rounded text-[10px] font-bold">Arabika</span>
+                                    {% else %}
+                                        <span class="badge-robusta px-2 py-0.5 rounded text-[10px] font-bold">Robusta</span>
+                                    {% endif %}
+                                </td>
+                                <td class="py-3 text-cream-300">{{ bean.origin }}</td>
+                                <td class="py-3 font-bold text-gold-400">{{ bean.cupping_score or '-' }}</td>
+                                <td class="py-3 text-right">
+                                    <a href="{{ url_for('admin_bean_edit', id=bean.id) }}" class="text-cream-300 hover:text-gold-400 font-semibold mr-2">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Sample Requests (5 Cols) -->
+        <div class="lg:col-span-5 bg-forest-900 border border-forest-800 rounded-2xl p-6 shadow-md">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bebas text-2xl text-cream-50">SAMPLE REQUEST TERBARU</h3>
+                <a href="{{ url_for('admin_samples') }}" class="text-xs font-semibold text-gold-400 hover:underline">
+                    Kelola Semua &rarr;
+                </a>
+            </div>
+
+            <div class="space-y-3">
+                {% for sample in recent_samples %}
+                    <div class="p-3.5 rounded-xl bg-forest-950 border border-forest-800/80 text-xs">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-cream-100">{{ sample.roastery_name }}</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold {% if sample.status == 'Baru' %}bg-forest-800 text-gold-400 border border-gold-500/30{% elif sample.status == 'Diproses' %}bg-forest-800 text-cream-300{% else %}bg-emerald-950 text-emerald-300 border border-emerald-600/40{% endif %}">
+                                {{ sample.status }}
+                            </span>
+                        </div>
+                        <div class="text-[11px] text-cream-300 mb-2">
+                            <span>PIC: {{ sample.contact_person }}</span> &bull; 
+                            <a href="https://wa.me/{{ sample.phone_whatsapp|replace('+', '')|replace('-', '')|replace(' ', '') }}" target="_blank" class="text-emerald-400 hover:underline">
+                                <i class="fa-brands fa-whatsapp"></i> {{ sample.phone_whatsapp }}
+                            </a>
+                        </div>
+                        <div class="text-[10px] text-cream-400 truncate bg-forest-900 p-2 rounded border border-forest-800">
+                            ☕ {{ sample.selected_beans }}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-xs text-cream-400 text-center py-6">Belum ada request sample.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,447 @@
+{% extends "base.html" %}
+
+{% block title %}Brew's Origin | Supplier Kopi Arabika & Robusta Indonesia{% endblock %}
+
+{% block content %}
+<!-- 1. Hero Section (Hijau Tua Perkebunan & Krem) -->
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+        <img src="{{ url_for('static', filename='assets/slide2-plantation.jpg') }}" alt="Perkebunan Kopi Indonesia" class="w-full h-full object-cover object-center transform scale-105 filter brightness-75">
+        <div class="absolute inset-0 hero-gradient"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
+        <!-- Pill Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest-800/90 border border-gold-500/40 text-gold-400 text-xs font-semibold mb-6 tracking-wider uppercase animate-fade-in shadow-lg">
+            <i class="fa-solid fa-leaf text-emerald-400"></i> B2B Green Bean & Specialty Roasted Sourcing
+        </div>
+
+        <!-- Main Headline with Bebas Neue -->
+        <h1 class="font-bebas text-5xl sm:text-7xl lg:text-8xl tracking-wider text-cream-50 uppercase leading-[0.95] mb-6 drop-shadow-md">
+            SUPPLIER BIJI KOPI TERBAIK <br>
+            <span class="text-gold-400">DARI HULU NUSANTARA</span>
+        </h1>
+
+        <!-- Subheading -->
+        <p class="text-base sm:text-lg lg:text-xl text-cream-200 max-w-3xl mx-auto font-normal leading-relaxed mb-10">
+            Brew's Origin menyuplai biji kopi pilihan <strong class="text-gold-400">Arabika Specialty</strong> dan <strong class="text-emerald-400">Fine Robusta</strong> dengan ketertelusuran (traceability) 100%, kalibrasi cupping Q-Grader, dan pengiriman langsung ke roastery serta kafe Anda.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="{{ url_for('coffee') }}" class="w-full sm:w-auto btn-primary px-8 py-4 rounded-xl font-bold text-sm tracking-wider uppercase inline-flex items-center justify-center gap-3">
+                <i class="fa-solid fa-mug-saucer"></i>
+                <span>Jelajahi Katalog Biji Kopi</span>
+            </a>
+            <a href="{{ url_for('sample') }}" class="w-full sm:w-auto btn-secondary px-8 py-4 rounded-xl font-bold text-sm tracking-wider uppercase inline-flex items-center justify-center gap-3">
+                <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+                <span>Minta Sampel Kopi (WA)</span>
+            </a>
+        </div>
+
+        <!-- Social Proof Pill -->
+        <div class="mt-8 flex items-center justify-center gap-2 text-xs text-cream-300">
+            <i class="fa-brands fa-instagram text-pink-400 text-sm"></i>
+            <span>Dokumentasi harian & panen live di</span>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="text-gold-400 font-semibold hover:underline">
+                @brewsorigin
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 2. Trust Stats Bar (Krem & Hijau Tua) -->
+<section class="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-forest-900/95 backdrop-blur-md border border-forest-800 rounded-2xl p-6 sm:p-8 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-forest-800">
+        <div class="pt-4 md:pt-0">
+            <div class="font-bebas text-4xl lg:text-5xl text-gold-400">100%</div>
+            <div class="text-xs uppercase tracking-wider text-cream-200 font-semibold mt-1">Single Origin Traceable</div>
+            <div class="text-[11px] text-cream-400 mt-0.5">Petani & Ketinggian Terverifikasi</div>
+        </div>
+        <div class="pt-4 md:pt-0">
+            <div class="font-bebas text-4xl lg:text-5xl text-gold-400">85+</div>
+            <div class="text-xs uppercase tracking-wider text-cream-200 font-semibold mt-1">SCA Cupping Score</div>
+            <div class="text-[11px] text-cream-400 mt-0.5">Grade 1 Specialty Quality</div>
+        </div>
+        <div class="pt-4 md:pt-0">
+            <div class="font-bebas text-4xl lg:text-5xl text-gold-400">50+</div>
+            <div class="text-xs uppercase tracking-wider text-cream-200 font-semibold mt-1">Mitra Roastery & Cafe</div>
+            <div class="text-[11px] text-cream-400 mt-0.5">Pengiriman Rutin se-Indonesia</div>
+        </div>
+        <div class="pt-4 md:pt-0">
+            <div class="font-bebas text-4xl lg:text-5xl text-gold-400">11-12%</div>
+            <div class="text-xs uppercase tracking-wider text-cream-200 font-semibold mt-1">Moisture Controlled</div>
+            <div class="text-[11px] text-cream-400 mt-0.5">Kemasan GrainPro Hermetis</div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Arabika vs Robusta Pillars -->
+<section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Karakter Pilihan Nusantara</span>
+        <h2 class="font-bebas text-4xl sm:text-5xl text-cream-50 mt-2">
+            DUA PILAR BIJI KOPI UNGGULAN
+        </h2>
+        <p class="text-cream-300 text-sm sm:text-base mt-3">
+            Setiap roastery memiliki kebutuhan unik. Kami menyediakan lini Arabika berkarakter kompleks untuk filter & single origin, serta Fine Robusta berbody tebal dan manis untuk fondasi espresso susu.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Arabika Card -->
+        <div class="card-gradient rounded-3xl p-8 lg:p-10 relative overflow-hidden border border-gold-500/25 group">
+            <div class="absolute -right-10 -bottom-10 opacity-10 group-hover:opacity-20 transition-opacity">
+                <i class="fa-solid fa-seedling text-[180px] text-gold-400"></i>
+            </div>
+            <div class="relative z-10">
+                <span class="badge-arabica px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 mb-4">
+                    <i class="fa-solid fa-circle text-[8px]"></i> Specialty Grade
+                </span>
+                <h3 class="font-bebas text-3xl sm:text-4xl text-cream-50 mb-3">ARABIKA SPECIALTY</h3>
+                <p class="text-cream-200 text-sm leading-relaxed mb-6">
+                    Berasal dari dataran tinggi 1.300 - 1.800 MASL (Gayo, Kintamani, Ijen, Bajawa, Toraja). Kaya akan nuansa floral, stone fruits, citric acidity segar, dan kejernihan cup istimewa.
+                </p>
+                <div class="space-y-3 mb-8 text-xs text-cream-200">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-gold-400"></i>
+                        <span>Proses: Anaerobic Natural, Yellow Honey, Double Washed, Giling Basah</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-gold-400"></i>
+                        <span>Cupping Score: 85.0 – 88.0 SCA Certified</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-gold-400"></i>
+                        <span>Ideal untuk: Pour Over V60, Kalita, Single Origin Espresso</span>
+                    </div>
+                </div>
+                <a href="{{ url_for('coffee') }}?category=Arabika" class="inline-flex items-center gap-2 text-gold-400 font-bold text-sm hover:text-gold-300 transition-colors">
+                    Lihat Koleksi Arabika &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Robusta Card -->
+        <div class="card-gradient rounded-3xl p-8 lg:p-10 relative overflow-hidden border border-emerald-500/25 group">
+            <div class="absolute -right-10 -bottom-10 opacity-10 group-hover:opacity-20 transition-opacity">
+                <i class="fa-solid fa-leaf text-[180px] text-emerald-400"></i>
+            </div>
+            <div class="relative z-10">
+                <span class="badge-robusta px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 mb-4">
+                    <i class="fa-solid fa-circle text-[8px]"></i> Fine Robusta Standard
+                </span>
+                <h3 class="font-bebas text-3xl sm:text-4xl text-cream-50 mb-3">FINE ROBUSTA NUSANTARA</h3>
+                <p class="text-cream-200 text-sm leading-relaxed mb-6">
+                    Standar baru Robusta modern (Temanggung, Dampit Malang, Lampung). 100% petik merah menghasilkan body creamy, crema emas tebal, rasa cocoa manis tanpa sensasi pahit berlebih (harshness).
+                </p>
+                <div class="space-y-3 mb-8 text-xs text-cream-200">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Proses: Natural Extended Fermentation (Wine), Clean Washed, Honey Peaberry</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Cupping Score: 82.5 – 85.0 Fine Robusta CQI</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Ideal untuk: Espresso Base Es Kopi Susu, Commercial House Blend, Cold Brew</span>
+                    </div>
+                </div>
+                <a href="{{ url_for('coffee') }}?category=Robusta" class="inline-flex items-center gap-2 text-emerald-400 font-bold text-sm hover:text-emerald-300 transition-colors">
+                    Lihat Koleksi Robusta &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. Featured Coffee Beans Section -->
+<section class="py-20 bg-forest-900/60 border-y border-forest-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+            <div>
+                <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Koleksi Terpopuler</span>
+                <h2 class="font-bebas text-4xl sm:text-5xl text-cream-50 mt-1">
+                    FEATURED COFFEE BEANS
+                </h2>
+            </div>
+            <a href="{{ url_for('coffee') }}" class="text-sm font-semibold text-gold-400 hover:text-gold-300 flex items-center gap-2">
+                Lihat Seluruh Katalog ({{ featured_beans|length }}+ Varian) &rarr;
+            </a>
+        </div>
+
+        <!-- Grid of Beans -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for bean in featured_beans %}
+                <div class="card-gradient rounded-2xl overflow-hidden flex flex-col justify-between border border-forest-800/80">
+                    <div>
+                        <!-- Bean Image -->
+                        <div class="relative h-48 overflow-hidden bg-forest-950">
+                            <img src="{{ bean.image_url }}" alt="{{ bean.name }}" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+                            <!-- Category Badge -->
+                            <div class="absolute top-3 left-3">
+                                {% if bean.category == 'Arabika' %}
+                                    <span class="badge-arabica px-2.5 py-1 rounded-md text-[11px] font-bold">Arabika</span>
+                                {% else %}
+                                    <span class="badge-robusta px-2.5 py-1 rounded-md text-[11px] font-bold">Robusta</span>
+                                {% endif %}
+                            </div>
+                            <!-- Score Badge -->
+                            {% if bean.cupping_score %}
+                                <div class="absolute top-3 right-3 bg-forest-950/90 backdrop-blur-md px-2.5 py-1 rounded-md text-xs font-bold text-gold-400 border border-forest-700">
+                                    <i class="fa-solid fa-star text-[10px] text-gold-400 mr-1"></i>{{ bean.cupping_score }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Info Content -->
+                        <div class="p-5">
+                            <div class="text-[11px] text-cream-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-gold-400 text-xs"></i>
+                                <span class="truncate">{{ bean.origin }}</span>
+                            </div>
+                            <h4 class="font-bebas text-2xl text-cream-50 hover:text-gold-400 transition-colors line-clamp-1 mb-2">
+                                {{ bean.name }}
+                            </h4>
+                            
+                            <div class="flex items-center gap-2 text-xs text-cream-300 mb-3">
+                                <span class="bg-forest-800/80 px-2 py-0.5 rounded text-[11px] border border-forest-700/60">{{ bean.process }}</span>
+                                <span class="text-forest-600">&bull;</span>
+                                <span class="text-[11px]">{{ bean.altitude }}</span>
+                            </div>
+
+                            <!-- Tasting Notes Tags -->
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                {% for note in bean.notes_list[:3] %}
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-forest-800 text-cream-200 border border-forest-700/60">
+                                        {{ note }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Action -->
+                    <div class="p-5 pt-0 border-t border-forest-800/80 mt-auto flex items-center justify-between gap-2">
+                        <button onclick='openBeanModal({{ bean.to_dict()|tojson|safe }})' class="text-xs font-bold text-cream-300 hover:text-gold-400 transition-colors">
+                            Lihat Spek
+                        </button>
+                        <a href="{{ url_for('sample') }}?bean={{ bean.name|urlencode }}" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-forest-950"></i> Minta Sample
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 5. Direct Trade & Sourcing Story -->
+<section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left: Image Collage -->
+        <div class="relative">
+            <div class="rounded-3xl overflow-hidden border border-forest-800 shadow-2xl">
+                <img src="{{ url_for('static', filename='assets/coffee-farmer.jpg') }}" alt="Petani Kopi Indonesia Brew's Origin" class="w-full h-[480px] object-cover filter brightness-95 hover:scale-105 transition-transform duration-700">
+            </div>
+            <!-- Floating Overlay Card (Krem Nuansa Hangat) -->
+            <div class="absolute -bottom-6 -right-6 sm:bottom-8 sm:-right-8 bg-forest-900/95 backdrop-blur-md p-5 rounded-2xl border border-gold-500/40 shadow-2xl max-w-xs">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-cream-50">Kemitraan Langsung</div>
+                        <div class="text-[10px] text-cream-300">Direct-Trade Tanpa Tengkulak</div>
+                    </div>
+                </div>
+                <p class="text-[11px] text-cream-200 leading-normal">
+                    Kami memberikan harga premium di atas pasar kepada pekebun kopi lokal untuk menjamin kesejahteraan petani dan konsistensi panen.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right: Story Copy -->
+        <div class="space-y-6">
+            <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Filosofi & Rantai Pasok</span>
+            <h2 class="font-bebas text-4xl sm:text-5xl text-cream-50 leading-tight">
+                MENGHUBUNGKAN KERINGAT PETANI DENGAN CANGKIR KOPI TERBAIK ANDA
+            </h2>
+            <p class="text-cream-200 text-sm sm:text-base leading-relaxed">
+                Di <strong>Brew's Origin</strong>, kami meyakini bahwa biji kopi specialty yang luar biasa tidak tercipta secara kebetulan. Kualitas dimulai dari ketinggian tanah vulkanik, dedikasi petani dalam memetik ceri merah sempurna, hingga pengawalan proses fermentasi yang higienis.
+            </p>
+            
+            <div class="space-y-4 pt-2">
+                <div class="flex items-start gap-4">
+                    <div class="w-8 h-8 rounded-xl bg-forest-800 text-gold-400 flex-shrink-0 flex items-center justify-center mt-1 border border-forest-700">
+                        <i class="fa-solid fa-scale-balanced text-sm"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-cream-100">Transparansi Harga & Keadilan Nilai</h4>
+                        <p class="text-xs text-cream-300 mt-1">Memastikan petani mendapatkan upah layak sehingga kebun dirawat secara berkelanjutan generasi demi generasi.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="w-8 h-8 rounded-xl bg-forest-800 text-gold-400 flex-shrink-0 flex items-center justify-center mt-1 border border-forest-700">
+                        <i class="fa-solid fa-flask-vial text-sm"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-cream-100">Kontrol Mutu di Lab Uji Cupping</h4>
+                        <p class="text-xs text-cream-300 mt-1">Setiap lot panen dikalibrasi oleh Q-Grader bersertifikat SCA dengan laporan cupping lengkap (fragrance, aroma, acidity, body, balance).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4">
+                <a href="{{ url_for('about') }}" class="inline-flex items-center gap-2 text-gold-400 font-bold text-sm hover:underline">
+                    Pelajari Cerita Kami & Standar Mutu Lebih Lanjut &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Quality & Warehouse Workflow Banner -->
+<section class="py-20 bg-forest-900/40 border-t border-forest-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+            <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Standar Pergudangan & Ekspor</span>
+            <h2 class="font-bebas text-4xl sm:text-5xl text-cream-50 mt-2">
+                DIPROTEKSI DARI KEBUN HINGGA ROASTERY
+            </h2>
+            <p class="text-cream-300 text-sm mt-3">
+                Kadar air dan kelembaban biji kopi dijaga secara ketat menggunakan kemasan kedap udara hermetis GrainPro untuk mencegah timbulnya aroma 'baggy' atau penurunan rasa.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="card-gradient rounded-2xl overflow-hidden border border-forest-800">
+                <div class="h-44 overflow-hidden">
+                    <img src="{{ url_for('static', filename='assets/slide6-workflow.jpg') }}" alt="Quality Grading" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="font-bebas text-2xl text-cream-50 mb-2">1. SORTIR TANGAN & GRADE 1</h4>
+                    <p class="text-xs text-cream-300 leading-relaxed">
+                        Pemisahan defect primer dan sekunder (zero black, zero sour bean) secara manual untuk menghasilkan green bean bersih berstandar ekspor.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-gradient rounded-2xl overflow-hidden border border-forest-800">
+                <div class="h-44 overflow-hidden">
+                    <img src="{{ url_for('static', filename='assets/slide6-quality.jpg') }}" alt="Cupping Protocol" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="font-bebas text-2xl text-cream-50 mb-2">2. KALIBRASI CUPPING LAB</h4>
+                    <p class="text-xs text-cream-300 leading-relaxed">
+                        Roasting sample menggunakan drum roaster presisi sebelum uji sensoris, memastikan konsistensi profil rasa setiap batch pengiriman.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-gradient rounded-2xl overflow-hidden border border-forest-800">
+                <div class="h-44 overflow-hidden">
+                    <img src="{{ url_for('static', filename='assets/slide5-export.jpg') }}" alt="Packaging GrainPro" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="font-bebas text-2xl text-cream-50 mb-2">3. WAREHOUSE GRAINPRO</h4>
+                    <p class="text-xs text-cream-300 leading-relaxed">
+                        Penyimpanan palet di ruang terkontrol suhu dan kelembaban, dikemas ganda dengan karung goni tebal dan liner GrainPro 60 kg.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. Instagram Showcase Banner (@brewsorigin) -->
+<section class="py-20 bg-gradient-to-b from-forest-950 via-forest-900 to-forest-950 border-t border-forest-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
+            <div>
+                <div class="inline-flex items-center gap-2 text-gold-400 font-bold text-xs uppercase tracking-widest mb-1">
+                    <i class="fa-brands fa-instagram text-pink-400 text-base"></i> Komunitas Kopi & Update Panen
+                </div>
+                <h2 class="font-bebas text-3xl sm:text-4xl text-cream-50">
+                    IKUTI KAMI DI INSTAGRAM <span class="text-gold-400">@BREWSORIGIN</span>
+                </h2>
+            </div>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-forest-800 to-forest-700 hover:from-forest-700 hover:to-forest-600 text-cream-100 font-bold text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-lg border border-gold-500/30">
+                <i class="fa-brands fa-instagram text-sm text-pink-400"></i>
+                <span>Follow @brewsorigin</span>
+            </a>
+        </div>
+
+        <!-- Instagram Gallery Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="group relative rounded-xl overflow-hidden aspect-square border border-forest-800">
+                <img src="{{ url_for('static', filename='assets/slide2-plantation.jpg') }}" alt="Kebun Kopi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-forest-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-gold-400">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="group relative rounded-xl overflow-hidden aspect-square border border-forest-800">
+                <img src="{{ url_for('static', filename='assets/coffee-farmer.jpg') }}" alt="Petani Kopi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-forest-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-gold-400">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="group relative rounded-xl overflow-hidden aspect-square border border-forest-800">
+                <img src="{{ url_for('static', filename='assets/slide3-processing.jpg') }}" alt="Penjemuran Kopi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-forest-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-gold-400">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="group relative rounded-xl overflow-hidden aspect-square border border-forest-800">
+                <img src="{{ url_for('static', filename='assets/slide6-quality.jpg') }}" alt="Cupping Session" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-forest-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-gold-400">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="group relative rounded-xl overflow-hidden aspect-square border border-forest-800">
+                <img src="{{ url_for('static', filename='assets/coffee-beans-sacks.jpg') }}" alt="Green Bean Sacks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-forest-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-gold-400">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="group relative rounded-xl overflow-hidden aspect-square border border-forest-800">
+                <img src="{{ url_for('static', filename='assets/slide8-partnership.jpg') }}" alt="Roastery Partnership" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-forest-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-gold-400">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 8. CTA Section (Warna Krem Karung Kopi Elegan dengan Tulisan Hijau Tua) -->
+<section class="py-20 bg-cream-100 text-forest-950 relative overflow-hidden border-t-2 border-gold-500">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <span class="text-xs font-bold tracking-widest text-forest-800 uppercase mb-2 block">
+            Kerjasama B2B Specialty Coffee
+        </span>
+        <h2 class="font-bebas text-4xl sm:text-6xl text-forest-950 tracking-wider mb-4">
+            SIAP MENINGKATKAN KUALITAS ROASTING KOPI ANDA?
+        </h2>
+        <p class="text-forest-800 text-sm sm:text-base font-medium max-w-2xl mx-auto mb-8">
+            Dapatkan paket sampel biji kopi pilihan (Green Bean / Sample Roast) untuk kalibrasi rasa di roastery Anda sebelum melakukan pemesanan partai besar.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="{{ url_for('sample') }}" class="bg-forest-900 hover:bg-forest-800 text-cream-100 px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xl border border-forest-700">
+                <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> Minta Sample Sekarang (WhatsApp)
+            </a>
+            <a href="{{ url_for('coffee') }}" class="bg-cream-200 hover:bg-cream-300 border-2 border-forest-900 text-forest-950 px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center transition-colors">
+                Lihat Semua Varietas Kopi
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Shared Bean Detail Modal -->
+{% include "components/bean_modal.html" %}
+
+{% endblock %}

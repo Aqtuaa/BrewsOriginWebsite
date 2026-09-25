@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('../assets/Font/BebasNeue-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* Palette Hijau Tua (Deep Forest / Perkebunan Kopi) */
+    --color-forest-darkest: #0a1711;
+    --color-forest-dark: #12281e;
+    --color-forest-card: #183528;
+    --color-forest-surface: #1e4232;
+    --color-forest-border: #2b5542;
+    --color-forest-accent: #2e694d;
+    --color-forest-hover: #3a805e;
+    
+    /* Palette Krem (Warm Specialty Parchment & Burlap) */
+    --color-cream-50: #fdfbf7;
+    --color-cream-100: #f7f2e7;
+    --color-cream-200: #efe5d3;
+    --color-cream-300: #e2d2b8;
+    --color-cream-400: #d1bc97;
+    --color-cream-500: #bfa577;
+    --color-cream-text: #f5eedf;
+    --color-cream-muted: #d0c4b2;
+    
+    /* Accent Emas & Daun */
+    --color-gold-accent: #d4a359;
+    --color-gold-hover: #e5b46a;
+    
+    --font-heading: 'Bebas Neue', sans-serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-forest-darkest);
+    color: var(--color-cream-text);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Headings with Bebas Neue */
+h1, h2, h3, .font-heading, .brand-font {
+    font-family: var(--font-heading);
+    letter-spacing: 0.04em;
+}
+
+.font-bebas {
+    font-family: var(--font-heading);
+    letter-spacing: 0.05em;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0d1e16;
+}
+::-webkit-scrollbar-thumb {
+    background: #234d39;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold-accent);
+}
+
+/* Hero Background Overlays */
+.hero-gradient {
+    background: linear-gradient(180deg, rgba(10, 23, 17, 0.45) 0%, rgba(10, 23, 17, 0.88) 75%, #0a1711 100%);
+}
+
+.card-gradient {
+    background: linear-gradient(145deg, rgba(20, 44, 33, 0.95), rgba(14, 32, 24, 0.98));
+    border: 1px solid rgba(212, 163, 89, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-gradient:hover {
+    border-color: rgba(212, 163, 89, 0.55);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.65), 0 0 20px -6px rgba(46, 105, 77, 0.35);
+}
+
+/* Krem Card Style (untuk kontras terang elegan) */
+.card-cream {
+    background: #f7f2e7;
+    color: #12281e;
+    border: 1px solid #e2d2b8;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-cream:hover {
+    box-shadow: 0 16px 32px -8px rgba(10, 23, 17, 0.15);
+    transform: translateY(-3px);
+}
+
+/* Pill badges */
+.badge-arabica {
+    background: rgba(212, 163, 89, 0.22);
+    color: #f7d59b;
+    border: 1px solid rgba(212, 163, 89, 0.5);
+}
+
+.badge-robusta {
+    background: rgba(46, 105, 77, 0.35);
+    color: #a7f3d0;
+    border: 1px solid rgba(46, 105, 77, 0.6);
+}
+
+.badge-tag {
+    background: rgba(247, 242, 231, 0.08);
+    color: #ede5d3;
+    border: 1px solid rgba(247, 242, 231, 0.15);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--color-gold-accent);
+    color: #0a1711;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: var(--color-gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(212, 163, 89, 0.4);
+}
+
+.btn-forest {
+    background-color: #1b3b2b;
+    color: #f7f2e7;
+    font-weight: 700;
+    border: 1px solid #2e694d;
+    transition: all 0.2s ease;
+}
+.btn-forest:hover {
+    background-color: #244f3a;
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(18, 40, 30, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-cream-text);
+    border: 1px solid rgba(247, 242, 231, 0.3);
+    transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+    background: rgba(247, 242, 231, 0.08);
+    border-color: var(--color-gold-accent);
+    color: var(--color-gold-accent);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+    background: rgba(8, 18, 13, 0.88);
+    backdrop-filter: blur(8px);
+}

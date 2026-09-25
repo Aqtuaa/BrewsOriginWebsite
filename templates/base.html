@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Brew's Origin | Indonesian Specialty & Fine Coffee Supplier{% endblock %}</title>
+    <meta name="description" content="Supplier biji kopi Indonesia terpercaya untuk roastery & coffee shop: Arabika Specialty & Fine Robusta langsung dari petani Nusantara.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            50: '#f2f8f5',
+                            100: '#e1ede6',
+                            200: '#c5ddd0',
+                            300: '#9ec4b1',
+                            400: '#71a58d',
+                            500: '#4e876f',
+                            600: '#3a6c57',
+                            700: '#2d5445',
+                            800: '#1b3b2b',   /* Hijau Tua Utama */
+                            900: '#12281e',   /* Hijau Tua Gelap */
+                            950: '#0a1711',   /* Hijau Tua Pekat / Canvas */
+                        },
+                        cream: {
+                            50: '#fdfbf7',    /* Krem Sangat Terang */
+                            100: '#f7f2e7',   /* Krem Dasar */
+                            200: '#efe5d3',   /* Krem Lembut */
+                            300: '#e2d2b8',   /* Krem Pasir */
+                            400: '#d1bc97',
+                            500: '#bfa577',
+                            600: '#a38758',
+                            700: '#826943',
+                            800: '#634f33',
+                            900: '#463724',
+                            950: '#2b2114',
+                        },
+                        gold: {
+                            400: '#e5b46a',
+                            500: '#d4a359',
+                            600: '#bd8941',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Bebas Neue"', 'sans-serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS (Bebas Neue Font & Hijau Tua + Krem Styles) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-forest-950 text-cream-100 min-h-screen flex flex-col selection:bg-gold-500 selection:text-forest-950">
+
+    <!-- Top Announcement Bar (Hijau Tua & Krem) -->
+    <div class="bg-gradient-to-r from-forest-900 via-forest-800 to-forest-900 text-cream-200 text-xs py-2 px-4 border-b border-forest-800/80">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center text-gold-400 font-semibold tracking-wide">
+                    <i class="fa-solid fa-seedling mr-1.5 text-emerald-400"></i> Direct Trade Supplier
+                </span>
+                <span class="hidden md:inline text-forest-600">|</span>
+                <span class="hidden md:inline text-cream-300">Panen Baru 2024/2025: Gayo Anaerobic & Temanggung Fine Robusta Ready!</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="hover:text-gold-400 transition-colors flex items-center gap-1.5">
+                    <i class="fa-brands fa-instagram text-sm text-pink-400"></i>
+                    <span class="font-medium text-cream-100">@brewsorigin</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-forest-950/95 backdrop-blur-md border-b border-forest-800/70 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="{{ url_for('index') }}" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-forest-800 to-forest-900 border border-gold-500/40 flex items-center justify-center shadow-lg shadow-forest-950/60 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-mug-hot text-gold-400 text-xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bebas text-3xl tracking-wider text-cream-50 group-hover:text-gold-400 transition-colors leading-none">
+                        BREW'S ORIGIN
+                    </span>
+                    <span class="text-[10px] tracking-[0.25em] text-gold-400 font-semibold uppercase">
+                        Coffee Sourcing
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="{{ url_for('index') }}" class="transition-colors py-1 hover:text-gold-400 {{ 'text-gold-400 font-semibold' if request.endpoint == 'index' else 'text-cream-200' }}">
+                    Home
+                </a>
+                <a href="{{ url_for('about') }}" class="transition-colors py-1 hover:text-gold-400 {{ 'text-gold-400 font-semibold' if request.endpoint == 'about' else 'text-cream-200' }}">
+                    About Us
+                </a>
+                <div class="relative group">
+                    <a href="{{ url_for('coffee') }}" class="transition-colors py-1 hover:text-gold-400 flex items-center gap-1 {{ 'text-gold-400 font-semibold' if request.endpoint == 'coffee' else 'text-cream-200' }}">
+                        Our Coffee <i class="fa-solid fa-chevron-down text-[10px] opacity-70 group-hover:rotate-180 transition-transform"></i>
+                    </a>
+                    <div class="absolute left-0 mt-2 w-52 bg-forest-900 border border-forest-700/80 rounded-xl shadow-2xl py-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200">
+                        <a href="{{ url_for('coffee') }}?category=Arabika" class="block px-4 py-2.5 text-xs hover:bg-forest-800 text-cream-200 hover:text-gold-400">
+                            <i class="fa-solid fa-seedling text-gold-400 mr-2"></i> Arabika Specialty
+                        </a>
+                        <a href="{{ url_for('coffee') }}?category=Robusta" class="block px-4 py-2.5 text-xs hover:bg-forest-800 text-cream-200 hover:text-emerald-400">
+                            <i class="fa-solid fa-leaf text-emerald-400 mr-2"></i> Fine Robusta
+                        </a>
+                        <div class="border-t border-forest-800 my-1"></div>
+                        <a href="{{ url_for('coffee') }}" class="block px-4 py-2 text-xs hover:bg-forest-800 text-cream-300 hover:text-cream-100">
+                            Lihat Semua Biji Kopi &rarr;
+                        </a>
+                    </div>
+                </div>
+                <a href="{{ url_for('sample') }}" class="transition-colors py-1 hover:text-gold-400 {{ 'text-gold-400 font-semibold' if request.endpoint == 'sample' else 'text-cream-200' }}">
+                    Send Sample
+                </a>
+                <a href="{{ url_for('blog') }}" class="transition-colors py-1 hover:text-gold-400 {{ 'text-gold-400 font-semibold' if request.endpoint in ['blog', 'blog_detail'] else 'text-cream-200' }}">
+                    Blog
+                </a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden lg:flex items-center space-x-4">
+                <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full bg-forest-900 hover:bg-forest-800 text-cream-200 hover:text-pink-400 border border-forest-700/60 transition-all duration-200" title="Follow Instagram @brewsorigin">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                </a>
+                <a href="{{ url_for('sample') }}" class="btn-primary px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider font-bold inline-flex items-center gap-2 shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-base text-forest-950"></i>
+                    <span>Minta Sample (WA)</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-forest-900 text-cream-200 hover:text-white border border-forest-800">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-forest-900 border-b border-forest-800 px-4 py-6 space-y-4">
+            <a href="{{ url_for('index') }}" class="block text-base font-medium text-cream-100 hover:text-gold-400">Beranda (Home)</a>
+            <a href="{{ url_for('about') }}" class="block text-base font-medium text-cream-100 hover:text-gold-400">Tentang Kami (About Us)</a>
+            <a href="{{ url_for('coffee') }}" class="block text-base font-medium text-cream-100 hover:text-gold-400">Katalog Kopi (Our Coffee)</a>
+            <div class="pl-4 space-y-2 border-l-2 border-forest-700">
+                <a href="{{ url_for('coffee') }}?category=Arabika" class="block text-sm text-cream-300 hover:text-gold-400">&bull; Arabika Specialty</a>
+                <a href="{{ url_for('coffee') }}?category=Robusta" class="block text-sm text-cream-300 hover:text-emerald-400">&bull; Fine Robusta</a>
+            </div>
+            <a href="{{ url_for('sample') }}" class="block text-base font-medium text-cream-100 hover:text-gold-400">Permintaan Sample (Send Sample)</a>
+            <a href="{{ url_for('blog') }}" class="block text-base font-medium text-cream-100 hover:text-gold-400">Blog & Edukasi</a>
+            <div class="pt-4 border-t border-forest-800 flex flex-col gap-3">
+                <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-cream-200 hover:text-pink-400">
+                    <i class="fa-brands fa-instagram text-pink-400"></i> Follow @brewsorigin
+                </a>
+                <a href="{{ url_for('sample') }}" class="btn-primary text-center py-3 rounded-xl font-bold text-xs uppercase tracking-wider">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Request Sample via WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="max-w-4xl mx-auto px-4 mt-4 w-full">
+                {% for category, message in messages %}
+                    <div class="p-4 rounded-xl mb-3 flex items-center justify-between text-xs font-semibold {% if category == 'danger' %}bg-rose-950/80 border border-rose-800 text-rose-200{% elif category == 'success' %}bg-forest-800 border border-emerald-600 text-emerald-200{% else %}bg-forest-900 border border-gold-500/40 text-gold-300{% endif %}">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid {% if category == 'danger' %}fa-circle-exclamation{% elif category == 'success' %}fa-circle-check{% else %}fa-circle-info{% endif %}"></i>
+                            <span>{{ message }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Page Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Floating WhatsApp Quick Button -->
+    <a href="{{ url_for('sample') }}" class="fixed bottom-6 right-6 z-40 bg-emerald-600 hover:bg-emerald-500 text-white p-4 rounded-full shadow-2xl shadow-forest-950 flex items-center justify-center group hover:scale-110 transition-all duration-300 border border-emerald-400/40" title="Chat WhatsApp / Request Sample">
+        <i class="fa-brands fa-whatsapp text-2xl group-hover:rotate-12 transition-transform"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-in-out font-bold text-xs px-0 group-hover:px-2">
+            Minta Sample Kopi
+        </span>
+    </a>
+
+    <!-- Footer (Hijau Tua & Krem) -->
+    <footer class="bg-forest-900 border-t border-forest-800 text-cream-300 mt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+                <!-- Col 1: Brand Info -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-gold-500 text-forest-950 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-mug-hot text-lg"></i>
+                        </div>
+                        <span class="font-bebas text-3xl tracking-wider text-cream-50">BREW'S ORIGIN</span>
+                    </div>
+                    <p class="text-sm text-cream-300 leading-relaxed max-w-sm">
+                        Partner terpercaya pengadaan biji kopi Indonesia (Green Bean & Specialty Roasting). Menghubungkan langsung pekebun kopi terbaik Nusantara dengan roastery, kafe, dan eksportir global.
+                    </p>
+                    <div class="pt-2 flex items-center space-x-3">
+                        <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-forest-800 hover:bg-gradient-to-tr hover:from-pink-600 hover:to-gold-500 text-cream-200 hover:text-white flex items-center justify-center transition-all duration-300 border border-forest-700" title="Instagram @brewsorigin">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="{{ url_for('sample') }}" class="w-9 h-9 rounded-full bg-forest-800 hover:bg-emerald-600 text-cream-200 hover:text-white flex items-center justify-center transition-all duration-300 border border-forest-700" title="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:partnership@brewsorigin.com" class="w-9 h-9 rounded-full bg-forest-800 hover:bg-gold-500 hover:text-forest-950 text-cream-200 flex items-center justify-center transition-all duration-300 border border-forest-700" title="Email">
+                            <i class="fa-regular fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Katalog Kopi -->
+                <div>
+                    <h4 class="text-sm font-semibold text-cream-100 uppercase tracking-wider mb-4 border-l-2 border-gold-500 pl-2">
+                        Katalog Kopi
+                    </h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="{{ url_for('coffee') }}?category=Arabika" class="hover:text-gold-400 transition-colors">Arabika Specialty</a></li>
+                        <li><a href="{{ url_for('coffee') }}?category=Robusta" class="hover:text-gold-400 transition-colors">Fine Robusta Nusantara</a></li>
+                        <li><a href="{{ url_for('coffee') }}?process=Anaerobic" class="hover:text-gold-400 transition-colors">Anaerobic & Experimental</a></li>
+                        <li><a href="{{ url_for('coffee') }}?process=Washed" class="hover:text-gold-400 transition-colors">Full Washed Clean Cup</a></li>
+                        <li><a href="{{ url_for('coffee') }}?process=Honey" class="hover:text-gold-400 transition-colors">Yellow & Red Honey</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Layanan & Informasi -->
+                <div>
+                    <h4 class="text-sm font-semibold text-cream-100 uppercase tracking-wider mb-4 border-l-2 border-gold-500 pl-2">
+                        Layanan B2B
+                    </h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="{{ url_for('sample') }}" class="hover:text-gold-400 transition-colors">Kirim Permintaan Sampel</a></li>
+                        <li><a href="{{ url_for('about') }}#workflow" class="hover:text-gold-400 transition-colors">Standar Mutu Q-Grader</a></li>
+                        <li><a href="{{ url_for('about') }}#direct-trade" class="hover:text-gold-400 transition-colors">Kemitraan Petani Lokal</a></li>
+                        <li><a href="{{ url_for('about') }}#warehouse" class="hover:text-gold-400 transition-colors">Gudang & Pengemasan Sak</a></li>
+                        <li><a href="{{ url_for('blog') }}" class="hover:text-gold-400 transition-colors">Artikel & Riset Kopi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Instagram & Hubungi Kami -->
+                <div>
+                    <h4 class="text-sm font-semibold text-cream-100 uppercase tracking-wider mb-4 border-l-2 border-gold-500 pl-2">
+                        Official Social
+                    </h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="p-3.5 rounded-xl bg-forest-800/80 border border-forest-700">
+                            <span class="text-xs text-cream-300 block mb-1">Ikuti Instagram kami:</span>
+                            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="font-bold text-cream-50 hover:text-gold-400 flex items-center gap-2">
+                                <i class="fa-brands fa-instagram text-pink-400 text-base"></i> @brewsorigin
+                            </a>
+                        </div>
+                        <p class="text-xs text-cream-300">
+                            Update panen terbaru, cupping score, dan aktivitas petani Nusantara setiap minggu di feed kami.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="border-t border-forest-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-cream-400 gap-4">
+                <p>&copy; 2026 Brew's Origin. Seluruh Hak Cipta Dilindungi. B2B Coffee Sourcing Indonesia.</p>
+                <div class="flex items-center space-x-6">
+                    <a href="{{ url_for('about') }}" class="hover:text-cream-200">Privasi</a>
+                    <a href="{{ url_for('coffee') }}" class="hover:text-cream-200">Syarat Pembelian B2B</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript Logic -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

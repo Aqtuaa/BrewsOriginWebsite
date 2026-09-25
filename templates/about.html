@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}Tentang Kami | Brew's Origin - Dedikasi Suplai Kopi Nusantara{% endblock %}
+
+{% block content %}
+<!-- Page Header (Hijau Tua Perkebunan) -->
+<section class="relative py-24 bg-forest-900 overflow-hidden border-b border-forest-800">
+    <div class="absolute inset-0 z-0 opacity-25">
+        <img src="{{ url_for('static', filename='assets/coffee-landscape.jpg') }}" alt="Highland Landscape" class="w-full h-full object-cover">
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Cerita & Nilai Kami</span>
+        <h1 class="font-bebas text-5xl sm:text-7xl text-cream-50 mt-2 mb-4 tracking-wider">
+            TENTANG BREW'S ORIGIN
+        </h1>
+        <p class="text-cream-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Menghadirkan integritas rasa kopi Nusantara melalui kemitraan berkeadilan dengan petani dan protokol mutu berstandar global.
+        </p>
+    </div>
+</section>
+
+<!-- Story & Mission Section -->
+<section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+            <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Latar Belakang</span>
+            <h2 class="font-bebas text-4xl sm:text-5xl text-cream-50 mt-2 mb-6">
+                DARI KETINGGIAN TANAH VULKANIK KE CANGKIR ROASTERY
+            </h2>
+            <div class="space-y-4 text-cream-200 text-sm leading-relaxed">
+                <p>
+                    <strong>Brew's Origin</strong> lahir dari kegelisahan terhadap rantai pasok kopi konvensional yang kerap memutus hubungan antara pembeli dengan asal-usul tanah tempat kopi tersebut bertumbuh. Kami percaya bahwa setiap biji kopi memiliki kisah geologis dan manusia di baliknya.
+                </p>
+                <p>
+                    Sebagai pemasok B2B spesialis, kami memposisikan diri sebagai jembatan langsung (direct-bridge) antara kelompok tani perkebunan di dataran tinggi Indonesia dengan roastery, kafe artisan, dan distributor kopi. Dengan memotong rantai tengkulak yang tidak transparan, kami memastikan petani menerima apresiasi harga yang pantas atas dedikasi panen mereka.
+                </p>
+                <p>
+                    Setiap varian biji kopi yang kami tawarkan—mulai dari <strong>Arabika Specialty Gayo & Kintamani</strong> hingga <strong>Fine Robusta Temanggung & Dampit</strong>—dilengkapi data origin yang presisi, riwayat proses pasca-panen, serta skor evaluasi uji sensoris cupping yang obyektif.
+                </p>
+            </div>
+
+            <!-- Stats Mini -->
+            <div class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-forest-800 text-center">
+                <div class="p-3.5 rounded-xl bg-forest-900 border border-forest-800">
+                    <div class="font-bebas text-3xl text-gold-400">6+</div>
+                    <div class="text-[10px] text-cream-300 uppercase font-semibold">Origin Nusantara</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-forest-900 border border-forest-800">
+                    <div class="font-bebas text-3xl text-gold-400">100%</div>
+                    <div class="text-[10px] text-cream-300 uppercase font-semibold">Petik Merah Pilihan</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-forest-900 border border-forest-800">
+                    <div class="font-bebas text-3xl text-gold-400">&lt; 1%</div>
+                    <div class="text-[10px] text-cream-300 uppercase font-semibold">Defect Standar SCA</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-4">
+                <img src="{{ url_for('static', filename='assets/coffee-farmer.jpg') }}" alt="Petani Kopi" class="rounded-2xl border border-forest-800 shadow-xl object-cover h-64 w-full">
+                <img src="{{ url_for('static', filename='assets/slide3-processing.jpg') }}" alt="Penjemuran Kopi" class="rounded-2xl border border-forest-800 shadow-xl object-cover h-48 w-full">
+            </div>
+            <div class="space-y-4 pt-8">
+                <img src="{{ url_for('static', filename='assets/slide4-farmers.jpg') }}" alt="Komunitas Petani" class="rounded-2xl border border-forest-800 shadow-xl object-cover h-48 w-full">
+                <img src="{{ url_for('static', filename='assets/slide6-workflow.jpg') }}" alt="Sorting Biji Kopi" class="rounded-2xl border border-forest-800 shadow-xl object-cover h-64 w-full">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workflow & Quality Protocol -->
+<section id="workflow" class="py-20 bg-forest-900/50 border-y border-forest-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Standar Pengolahan</span>
+            <h2 class="font-bebas text-4xl sm:text-5xl text-cream-50 mt-2">
+                6 TAHAP PENGENDALIAN MUTU TERUKUR
+            </h2>
+            <p class="text-cream-300 text-sm mt-3">
+                Kami menerapkan prosedur operasional ketat dari hulu ke hilir untuk menjamin green bean yang sampai ke roaster Anda bebas dari cacat rasa dan stabil saat disangrai.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="p-6 rounded-2xl bg-forest-950 border border-forest-800/80 relative">
+                <span class="font-bebas text-5xl text-forest-800/60 absolute top-4 right-5 select-none">01</span>
+                <div class="w-10 h-10 rounded-xl bg-forest-800 text-gold-400 border border-forest-700 flex items-center justify-center font-bold mb-4">
+                    <i class="fa-solid fa-hand-holding-hand"></i>
+                </div>
+                <h4 class="font-bebas text-2xl text-cream-50 mb-2">SELEKSI PETIK MERAH</h4>
+                <p class="text-xs text-cream-300 leading-relaxed">
+                    Hanya buah kopi dengan tingkat kematangan brix optimal (> 95% ceri merah sempurna) yang dipanen untuk memastikan kadar gula alami maksimal.
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-6 rounded-2xl bg-forest-950 border border-forest-800/80 relative">
+                <span class="font-bebas text-5xl text-forest-800/60 absolute top-4 right-5 select-none">02</span>
+                <div class="w-10 h-10 rounded-xl bg-forest-800 text-gold-400 border border-forest-700 flex items-center justify-center font-bold mb-4">
+                    <i class="fa-solid fa-water"></i>
+                </div>
+                <h4 class="font-bebas text-2xl text-cream-50 mb-2">SORTASI APUNG (FLOTATION)</h4>
+                <p class="text-xs text-cream-300 leading-relaxed">
+                    Pemisahan biji hampa (floater) dan kotoran fisik menggunakan bak air bersih pegunungan sebelum masuk ke tahapan pengupasan kulit.
+                </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-6 rounded-2xl bg-forest-950 border border-forest-800/80 relative">
+                <span class="font-bebas text-5xl text-forest-800/60 absolute top-4 right-5 select-none">03</span>
+                <div class="w-10 h-10 rounded-xl bg-forest-800 text-gold-400 border border-forest-700 flex items-center justify-center font-bold mb-4">
+                    <i class="fa-solid fa-temperature-arrow-up"></i>
+                </div>
+                <h4 class="font-bebas text-2xl text-cream-50 mb-2">FERMENTASI TERKONTROL</h4>
+                <p class="text-xs text-cream-300 leading-relaxed">
+                    Penerapan durasi fermentasi terukur (Washed, Honey, Natural, maupun Anaerobic Maceration) dengan pemantauan pH berkala.
+                </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="p-6 rounded-2xl bg-forest-950 border border-forest-800/80 relative">
+                <span class="font-bebas text-5xl text-forest-800/60 absolute top-4 right-5 select-none">04</span>
+                <div class="w-10 h-10 rounded-xl bg-forest-800 text-gold-400 border border-forest-700 flex items-center justify-center font-bold mb-4">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+                <h4 class="font-bebas text-2xl text-cream-50 mb-2">PENJEMURAN RAISED BEDS</h4>
+                <p class="text-xs text-cream-300 leading-relaxed">
+                    Pengeringan perlahan di atas para-para beratap jaring UV dengan sirkulasi udara konstan hingga mencapai kadar air presisi 10.5% - 11.5%.
+                </p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="p-6 rounded-2xl bg-forest-950 border border-forest-800/80 relative">
+                <span class="font-bebas text-5xl text-forest-800/60 absolute top-4 right-5 select-none">05</span>
+                <div class="w-10 h-10 rounded-xl bg-forest-800 text-gold-400 border border-forest-700 flex items-center justify-center font-bold mb-4">
+                    <i class="fa-solid fa-filter"></i>
+                </div>
+                <h4 class="font-bebas text-2xl text-cream-50 mb-2">HULLING & SORTIR GRADE 1</h4>
+                <p class="text-xs text-cream-300 leading-relaxed">
+                    Pelepasan kulit tanduk (parchment) dilanjutkan dengan sortir ukuran ayakan (screen size) dan sortir tangan manual untuk menyisihkan biji cacat.
+                </p>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="p-6 rounded-2xl bg-forest-950 border border-forest-800/80 relative">
+                <span class="font-bebas text-5xl text-forest-800/60 absolute top-4 right-5 select-none">06</span>
+                <div class="w-10 h-10 rounded-xl bg-forest-800 text-gold-400 border border-forest-700 flex items-center justify-center font-bold mb-4">
+                    <i class="fa-solid fa-flask"></i>
+                </div>
+                <h4 class="font-bebas text-2xl text-cream-50 mb-2">UJI LAB SENSORIS CUPPING</h4>
+                <p class="text-xs text-cream-300 leading-relaxed">
+                    Evaluasi cupping oleh Q-Grader bersertifikat SCA untuk mencatat flavor notes, kebersihan cangkir (clean cup), acidity, dan skor keseluruhan.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Warehouse & Packaging -->
+<section id="warehouse" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="rounded-3xl overflow-hidden border border-forest-800 shadow-2xl">
+            <img src="{{ url_for('static', filename='assets/slide5-export.jpg') }}" alt="Gudang Kopi Ekspor" class="w-full h-96 object-cover">
+        </div>
+        <div class="space-y-5">
+            <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Fasilitas & Logistik</span>
+            <h2 class="font-bebas text-4xl sm:text-5xl text-cream-50">
+                PENGEMASAN HERMETIS & GUDANG MODERN
+            </h2>
+            <p class="text-cream-200 text-sm leading-relaxed">
+                Kualitas green bean yang unggul dapat rusak jika tidak dilindungi selama masa penyimpanan dan pengiriman. Oleh karena itu, seluruh kopi Brew's Origin dikemas dengan standar perlindungan berlapis:
+            </p>
+            <ul class="space-y-3 text-xs text-cream-300">
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-box-archive text-gold-400"></i>
+                    <span><strong>GrainPro Hermetic Liner</strong>: Menjaga kelembaban relatif dan mencegah oksidasi rasa.</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-shield text-gold-400"></i>
+                    <span><strong>Jute Bag Kuat 60 Kg</strong>: Karung goni standar ekspor internasional dengan penanda lot panen.</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-truck-fast text-gold-400"></i>
+                    <span><strong>Dukungan Pengiriman Fleksibel</strong>: Ekspedisi kargo darat/udara ke seluruh kota di Indonesia dan pengurusan kontainer FCL/LCL untuk kebutuhan ekspor.</span>
+                </li>
+            </ul>
+            <div class="pt-4">
+                <a href="{{ url_for('sample') }}" class="btn-primary px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-forest-950"></i> Minta Sample untuk Roastery Anda
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

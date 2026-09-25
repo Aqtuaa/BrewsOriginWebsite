@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Blog & Edukasi Kopi | Brew's Origin{% endblock %}
+
+{% block content %}
+<!-- Page Header (Hijau Tua Perkebunan) -->
+<section class="relative py-20 bg-forest-900 overflow-hidden border-b border-forest-800">
+    <div class="absolute inset-0 z-0 opacity-25">
+        <img src="{{ url_for('static', filename='assets/slide3-processing.jpg') }}" alt="Blog Banner" class="w-full h-full object-cover">
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Wawasan & Jurnal Industri</span>
+        <h1 class="font-bebas text-5xl sm:text-7xl text-cream-50 mt-2 mb-4 tracking-wider">
+            BREW'S COFFEE JOURNAL
+        </h1>
+        <p class="text-cream-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Artikel teknis seputar agrikultur kopi, teknik fermentasi pasca-panen, kalibrasi profil roasting, dan tren pasar kopi specialty Nusantara.
+        </p>
+    </div>
+</section>
+
+<!-- Blog Post Grid -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for post in posts %}
+            <article class="card-gradient rounded-2xl overflow-hidden flex flex-col justify-between border border-forest-800 group">
+                <div>
+                    <!-- Image -->
+                    <div class="relative h-52 overflow-hidden bg-forest-950">
+                        <img src="{{ post.image_url }}" alt="{{ post.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-3 left-3 bg-forest-950/90 backdrop-blur-sm px-2.5 py-1 rounded-md text-[10px] font-bold text-gold-400 border border-forest-700 uppercase tracking-wider">
+                            {{ post.category }}
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 text-[11px] text-cream-400 mb-3">
+                            <span><i class="fa-regular fa-clock mr-1"></i>{{ post.read_time }}</span>
+                            <span>&bull;</span>
+                            <span>{{ post.created_at.strftime('%d %B %Y') }}</span>
+                        </div>
+
+                        <h3 class="font-bebas text-2xl text-cream-50 group-hover:text-gold-400 transition-colors line-clamp-2 mb-3 leading-snug">
+                            <a href="{{ url_for('blog_detail', slug=post.slug) }}">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+
+                        <p class="text-xs text-cream-300 line-clamp-3 leading-relaxed mb-4">
+                            {{ post.excerpt }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="p-6 pt-0 border-t border-forest-800/80 mt-auto flex items-center justify-between">
+                    <span class="text-[11px] text-cream-400 font-medium">Oleh: {{ post.author }}</span>
+                    <a href="{{ url_for('blog_detail', slug=post.slug) }}" class="text-xs font-bold text-gold-400 hover:text-gold-300 flex items-center gap-1.5 transition-colors">
+                        <span>Baca</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

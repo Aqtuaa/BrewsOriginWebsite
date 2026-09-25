@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}Katalog Biji Kopi | Brew's Origin - Arabika & Robusta Pilihan{% endblock %}
+
+{% block content %}
+<!-- Page Header (Hijau Tua Perkebunan) -->
+<section class="relative py-20 bg-forest-900 overflow-hidden border-b border-forest-800">
+    <div class="absolute inset-0 z-0 opacity-25">
+        <img src="{{ url_for('static', filename='assets/coffee-beans-sacks.jpg') }}" alt="Koleksi Kopi" class="w-full h-full object-cover">
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Katalog B2B Terlengkap</span>
+        <h1 class="font-bebas text-5xl sm:text-7xl text-cream-50 mt-2 mb-4 tracking-wider">
+            OUR COFFEE COLLECTION
+        </h1>
+        <p class="text-cream-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Eksplorasi ragam karakter biji kopi Arabika Specialty dan Fine Robusta dari perkebunan terbaik Nusantara dengan data cupping transparan.
+        </p>
+    </div>
+</section>
+
+<!-- Filter & Search Section (Sticky Bar) -->
+<section class="py-8 bg-forest-950 sticky top-20 z-30 border-b border-forest-800 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+            <!-- Category Tabs -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0">
+                <button data-category="all" class="filter-category-btn px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all {{ 'bg-gold-500 text-forest-950 font-bold' if not active_category else 'bg-forest-900 text-cream-200 border border-forest-800' }}">
+                    Semua Kopi
+                </button>
+                <button data-category="Arabika" class="filter-category-btn px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all {{ 'bg-gold-500 text-forest-950 font-bold' if active_category == 'Arabika' else 'bg-forest-900 text-cream-200 border border-forest-800' }}">
+                    <i class="fa-solid fa-seedling mr-1 text-gold-400"></i> Arabika Specialty
+                </button>
+                <button data-category="Robusta" class="filter-category-btn px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all {{ 'bg-gold-500 text-forest-950 font-bold' if active_category == 'Robusta' else 'bg-forest-900 text-cream-200 border border-forest-800' }}">
+                    <i class="fa-solid fa-leaf mr-1 text-emerald-400"></i> Fine Robusta
+                </button>
+            </div>
+
+            <!-- Search & Process Filter -->
+            <div class="flex items-center gap-3 w-full lg:w-auto">
+                <!-- Process Dropdown -->
+                <div class="relative w-1/2 lg:w-48">
+                    <select id="coffee-process-filter" class="w-full bg-forest-900 border border-forest-800 rounded-xl px-3 py-2.5 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                        <option value="all">Semua Proses</option>
+                        <option value="washed">Washed / Wet</option>
+                        <option value="natural">Natural</option>
+                        <option value="honey">Honey Process</option>
+                        <option value="anaerobic">Anaerobic</option>
+                        <option value="giling basah">Wet Hulled / Giling Basah</option>
+                    </select>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-1/2 lg:w-64">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-cream-400 text-xs"></i>
+                    <input type="text" id="coffee-search" placeholder="Cari kopi, origin, rasa..." class="w-full bg-forest-900 border border-forest-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-cream-100 placeholder-cream-400 focus:outline-none focus:border-gold-500">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Coffee Beans Catalog Grid -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div id="coffee-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for bean in beans %}
+            <div class="coffee-bean-card card-gradient rounded-2xl overflow-hidden flex flex-col justify-between border border-forest-800"
+                 data-category="{{ bean.category }}"
+                 data-process="{{ bean.process }}"
+                 data-name="{{ bean.name }}"
+                 data-origin="{{ bean.origin }}"
+                 data-notes="{{ bean.flavor_notes }}">
+                
+                <div>
+                    <!-- Image & Badges -->
+                    <div class="relative h-52 overflow-hidden bg-forest-950">
+                        <img src="{{ bean.image_url }}" alt="{{ bean.name }}" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Category Badge -->
+                        <div class="absolute top-3 left-3">
+                            {% if bean.category == 'Arabika' %}
+                                <span class="badge-arabica px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wide">
+                                    Arabika
+                                </span>
+                            {% else %}
+                                <span class="badge-robusta px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wide">
+                                    Robusta
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Score Badge -->
+                        {% if bean.cupping_score %}
+                            <div class="absolute top-3 right-3 bg-forest-950/90 backdrop-blur-md px-2.5 py-1 rounded-md text-xs font-bold text-gold-400 border border-forest-700 shadow">
+                                <i class="fa-solid fa-star text-[10px] text-gold-400 mr-1"></i>{{ bean.cupping_score }}
+                            </div>
+                        {% endif %}
+
+                        <!-- Status Badge -->
+                        <div class="absolute bottom-3 left-3 bg-forest-950/85 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-[10px] text-cream-300 border border-forest-800">
+                            <i class="fa-solid fa-circle text-[6px] text-emerald-400 mr-1"></i>{{ bean.status }}
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-5">
+                        <div class="text-[11px] text-cream-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-gold-400 text-xs"></i>
+                            <span class="truncate">{{ bean.origin }}</span>
+                        </div>
+                        
+                        <h3 class="font-bebas text-2xl text-cream-50 hover:text-gold-400 transition-colors line-clamp-1 mb-2">
+                            {{ bean.name }}
+                        </h3>
+
+                        <div class="flex items-center gap-2 text-xs text-cream-300 mb-3">
+                            <span class="bg-forest-800/90 px-2 py-0.5 rounded text-[11px] font-medium text-cream-200 border border-forest-700/60">
+                                {{ bean.process }}
+                            </span>
+                            <span class="text-forest-600">&bull;</span>
+                            <span class="text-[11px]">{{ bean.altitude }}</span>
+                        </div>
+
+                        <!-- Flavor Tags -->
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            {% for note in bean.notes_list[:4] %}
+                                <span class="px-2 py-0.5 rounded-full text-[10px] bg-forest-800 text-cream-200 border border-forest-700/60">
+                                    {{ note }}
+                                </span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="text-xs text-cream-300 line-clamp-2 leading-relaxed mb-2">
+                            {{ bean.description }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Footer Actions -->
+                <div class="p-5 pt-0 border-t border-forest-800/80 mt-auto flex items-center justify-between gap-2">
+                    <button onclick='openBeanModal({{ bean|tojson|safe }})' class="text-xs font-bold text-cream-300 hover:text-gold-400 transition-colors py-2">
+                        <i class="fa-regular fa-eye mr-1"></i> Spesifikasi
+                    </button>
+                    <a href="{{ url_for('sample') }}?bean={{ bean.name|urlencode }}" class="btn-primary px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
+                        <i class="fa-brands fa-whatsapp text-forest-950"></i> Minta Sample
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Empty Results Message -->
+    <div id="no-results-message" class="hidden text-center py-20">
+        <div class="w-16 h-16 rounded-full bg-forest-900 border border-forest-800 flex items-center justify-center mx-auto mb-4 text-cream-400 text-2xl">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <h4 class="font-bebas text-3xl text-cream-100 mb-2">TIDAK ADA KOPI YANG COCOK</h4>
+        <p class="text-xs text-cream-400 max-w-md mx-auto">
+            Coba ubah kata kunci pencarian Anda atau reset filter untuk melihat seluruh koleksi biji kopi.
+        </p>
+    </div>
+</section>
+
+<!-- Modal Component Include -->
+{% include "components/bean_modal.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Handle URL query parameter pre-filtering e.g. /coffee?category=Arabika
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cat = urlParams.get('category');
+        if (cat) {
+            const targetBtn = document.querySelector(`.filter-category-btn[data-category="${cat}"]`);
+            if (targetBtn) {
+                targetBtn.click();
+            }
+        }
+        const proc = urlParams.get('process');
+        if (proc) {
+            const procSelect = document.getElementById('coffee-process-filter');
+            if (procSelect) {
+                procSelect.value = proc.toLowerCase();
+                procSelect.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+</script>
+{% endblock %}

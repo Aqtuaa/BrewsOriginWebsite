@@ -1,0 +1,88 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Kelola Biji Kopi | Admin Brew's Origin{% endblock %}
+{% block section_name %}Katalog Biji Kopi{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header with Action -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+            <h1 class="font-bebas text-4xl text-cream-50">MANAJEMEN BIJI KOPI</h1>
+            <p class="text-xs text-cream-300">Tambah, ubah spesifikasi teknis, atau hapus varian biji kopi Arabika & Robusta.</p>
+        </div>
+        <a href="{{ url_for('admin_bean_new') }}" class="btn-primary px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg">
+            <i class="fa-solid fa-plus text-forest-950"></i> Tambah Biji Kopi Baru
+        </a>
+    </div>
+
+    <!-- Beans List Table Card -->
+    <div class="bg-forest-900 border border-forest-800 rounded-2xl overflow-hidden shadow-lg">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="bg-forest-950/90 border-b border-forest-800 text-cream-400 uppercase tracking-wider text-[11px]">
+                        <th class="py-4 px-5">Foto</th>
+                        <th class="py-4 px-4">Nama Varian Kopi</th>
+                        <th class="py-4 px-4">Kategori</th>
+                        <th class="py-4 px-4">Asal / Origin</th>
+                        <th class="py-4 px-4">Proses & Alt</th>
+                        <th class="py-4 px-4">Score</th>
+                        <th class="py-4 px-4">Status Stok</th>
+                        <th class="py-4 px-5 text-right">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-forest-800/80">
+                    {% for bean in beans %}
+                        <tr class="hover:bg-forest-800/50 transition-colors">
+                            <td class="py-3 px-5">
+                                <img src="{{ bean.image_url }}" alt="" class="w-12 h-12 rounded-xl object-cover border border-forest-800">
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="font-bold text-cream-50 text-sm">{{ bean.name }}</div>
+                                <div class="text-[10px] text-cream-400 font-mono">Varietas: {{ bean.variety }}</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                {% if bean.category == 'Arabika' %}
+                                    <span class="badge-arabica px-2.5 py-1 rounded-md text-[10px] font-bold">Arabika</span>
+                                {% else %}
+                                    <span class="badge-robusta px-2.5 py-1 rounded-md text-[10px] font-bold">Robusta</span>
+                                {% endif %}
+                            </td>
+                            <td class="py-3 px-4 text-cream-200 font-medium">{{ bean.origin }}</td>
+                            <td class="py-3 px-4">
+                                <div class="text-cream-200">{{ bean.process }}</div>
+                                <div class="text-[10px] text-cream-400">{{ bean.altitude }}</div>
+                            </td>
+                            <td class="py-3 px-4 font-bold text-gold-400 text-sm">
+                                {{ bean.cupping_score or '-' }}
+                            </td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-forest-800 text-cream-200 border border-forest-700">
+                                    {{ bean.status }}
+                                </span>
+                            </td>
+                            <td class="py-3 px-5 text-right space-x-2">
+                                <a href="{{ url_for('admin_bean_edit', id=bean.id) }}" class="inline-block px-3 py-1.5 rounded-lg bg-forest-800 hover:bg-forest-700 text-cream-200 hover:text-gold-400 font-bold transition-colors border border-forest-700">
+                                    <i class="fa-regular fa-pen-to-square mr-1"></i> Edit
+                                </a>
+                                <form method="POST" action="{{ url_for('admin_bean_delete', id=bean.id) }}" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus biji kopi ini? Data yang terhapus tidak dapat dikembalikan.');">
+                                    <button type="submit" class="px-3 py-1.5 rounded-lg bg-rose-950/50 hover:bg-rose-900/60 text-rose-300 font-bold transition-colors border border-rose-900/60">
+                                        <i class="fa-regular fa-trash-can mr-1"></i> Hapus
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center py-12 text-cream-400 text-xs">
+                                Belum ada data biji kopi di database.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

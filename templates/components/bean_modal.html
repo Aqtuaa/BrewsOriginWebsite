@@ -1,0 +1,116 @@
+<!-- Coffee Bean Specifications Modal (Hijau Tua & Krem) -->
+<div id="bean-detail-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="fixed inset-0 modal-backdrop transition-opacity"></div>
+
+    <!-- Modal Box -->
+    <div class="relative bg-forest-900 border border-gold-500/40 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl z-10 my-8">
+        <!-- Close Button -->
+        <button id="modal-close-btn" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-forest-800/90 hover:bg-forest-700 text-cream-200 hover:text-white flex items-center justify-center transition-colors border border-forest-700">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 max-h-[85vh] overflow-y-auto">
+            <!-- Left: Bean Image & Badges -->
+            <div class="md:col-span-2 relative bg-forest-950 flex flex-col items-center justify-center p-6 border-b md:border-b-0 md:border-r border-forest-800">
+                <img id="modal-bean-image" src="/static/assets/coffee-beans-sacks.jpg" alt="Biji Kopi" class="w-full h-48 sm:h-56 object-cover rounded-2xl border border-forest-800 shadow-md">
+                
+                <div class="w-full mt-4 flex items-center justify-between">
+                    <span id="modal-bean-category" class="badge-arabica px-3 py-1 rounded-full text-xs font-bold uppercase">
+                        Arabika
+                    </span>
+                    <div class="bg-forest-800 text-gold-400 px-3 py-1 rounded-full text-xs font-bold border border-gold-500/40 flex items-center gap-1 shadow">
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                        <span>Score: <strong id="modal-bean-score" class="text-cream-50">87.5</strong></span>
+                    </div>
+                </div>
+
+                <div class="w-full mt-4 p-3 rounded-xl bg-forest-900 border border-forest-800 text-xs text-cream-300 text-center">
+                    <i class="fa-solid fa-shield-halved text-gold-400 mr-1"></i> SCA Standard Grading
+                </div>
+            </div>
+
+            <!-- Right: Detailed Specifications -->
+            <div class="md:col-span-3 p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <!-- Origin & Title -->
+                    <div class="text-xs text-gold-400 font-semibold tracking-wider uppercase mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="modal-bean-origin">Aceh Gayo, Sumatra</span>
+                    </div>
+                    <h3 id="modal-bean-name" class="font-bebas text-3xl sm:text-4xl text-cream-50 mb-4 leading-none">
+                        Gayo Pantan Musara Anaerobic
+                    </h3>
+
+                    <!-- Tasting Notes Container -->
+                    <div class="mb-5">
+                        <span class="text-[11px] font-bold text-cream-300 uppercase tracking-wider block mb-2">
+                            Cupping Notes & Sensory:
+                        </span>
+                        <div id="modal-bean-notes" class="flex flex-wrap gap-1.5">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Specs Table Grid -->
+                    <div class="grid grid-cols-2 gap-3 text-xs bg-forest-950/70 p-4 rounded-2xl border border-forest-800/80 mb-5 text-cream-200">
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Ketinggian:</span>
+                            <span id="modal-bean-altitude" class="font-semibold text-cream-100">-</span>
+                        </div>
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Metode Proses:</span>
+                            <span id="modal-bean-process" class="font-semibold text-cream-100">-</span>
+                        </div>
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Varietas:</span>
+                            <span id="modal-bean-variety" class="font-semibold text-cream-100">-</span>
+                        </div>
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Kadar Air (Moisture):</span>
+                            <span id="modal-bean-moisture" class="font-semibold text-cream-100">-</span>
+                        </div>
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Screen Size / Grade:</span>
+                            <span id="modal-bean-screen" class="font-semibold text-cream-100">-</span>
+                        </div>
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Defect Rate:</span>
+                            <span id="modal-bean-defect" class="font-semibold text-cream-100">-</span>
+                        </div>
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Kemasan:</span>
+                            <span id="modal-bean-packaging" class="font-semibold text-cream-100">-</span>
+                        </div>
+                        <div>
+                            <span class="text-cream-400 block text-[10px] uppercase">Tahun Panen:</span>
+                            <span id="modal-bean-crop" class="font-semibold text-cream-100">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Roasting Recommendation -->
+                    <div class="mb-4 text-xs">
+                        <span class="text-cream-400 uppercase text-[10px] block font-bold">Rekomendasi Roasting:</span>
+                        <span id="modal-bean-roast" class="text-cream-200 italic font-medium">-</span>
+                    </div>
+
+                    <!-- Description -->
+                    <p id="modal-bean-desc" class="text-xs text-cream-300 leading-relaxed mb-6">
+                        Deskripsi biji kopi.
+                    </p>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="pt-4 border-t border-forest-800 flex items-center justify-between gap-3">
+                    <button onclick="closeBeanModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-cream-300 hover:text-cream-100 transition-colors">
+                        Tutup
+                    </button>
+                    <a id="modal-request-sample-btn" href="/sample" class="btn-primary px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-forest-950 text-base"></i>
+                        <span>Minta Sampel Kopi Ini</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

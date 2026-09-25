@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Blog & Edukasi Kopi | Brew's Origin{% endblock %}
+
+{% block content %}
+<article class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Back to blog -->
+    <div class="mb-8">
+        <a href="{{ url_for('blog') }}" class="text-xs font-semibold text-cream-300 hover:text-gold-400 inline-flex items-center gap-2 transition-colors">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Semua Artikel
+        </a>
+    </div>
+
+    <!-- Article Header -->
+    <header class="mb-10 text-center">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-forest-800 text-gold-400 border border-gold-500/40 mb-4">
+            {{ post.category }}
+        </span>
+        <h1 class="font-bebas text-4xl sm:text-6xl text-cream-50 tracking-wider mb-6 leading-tight">
+            {{ post.title }}
+        </h1>
+        <div class="flex items-center justify-center gap-4 text-xs text-cream-300">
+            <span><i class="fa-solid fa-user-pen mr-1.5 text-gold-400"></i>{{ post.author }}</span>
+            <span>&bull;</span>
+            <span><i class="fa-regular fa-clock mr-1 text-gold-400"></i>{{ post.read_time }}</span>
+            <span>&bull;</span>
+            <span><i class="fa-regular fa-calendar mr-1 text-gold-400"></i>{{ post.created_at.strftime('%d %B %Y') }}</span>
+        </div>
+    </header>
+
+    <!-- Featured Image -->
+    <div class="rounded-3xl overflow-hidden border border-forest-800 shadow-2xl mb-12 max-h-[480px]">
+        <img src="{{ post.image_url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+    </div>
+
+    <!-- Article Content -->
+    <div class="bg-forest-900/80 border border-forest-800/80 rounded-3xl p-6 sm:p-10 text-cream-200 leading-relaxed text-sm sm:text-base space-y-4 shadow-xl">
+        {{ post.content|safe }}
+    </div>
+
+    <!-- Social Share & Author Card -->
+    <div class="mt-12 p-6 rounded-2xl bg-forest-900 border border-forest-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-forest-800 border border-gold-500/40 flex items-center justify-center text-gold-400 text-xl font-bold">
+                <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <div>
+                <div class="text-sm font-bold text-cream-50">Tim Brew's Origin</div>
+                <div class="text-xs text-cream-300">Edukasi & Sourcing Biji Kopi Indonesia</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="text-xs text-cream-300">Follow Instagram:</span>
+            <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-forest-800 hover:bg-forest-700 border border-forest-700 text-cream-100 text-xs font-bold inline-flex items-center gap-2">
+                <i class="fa-brands fa-instagram text-pink-400"></i> @brewsorigin
+            </a>
+        </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-12 text-center p-8 rounded-3xl bg-forest-900/90 border border-gold-500/30">
+        <h3 class="font-bebas text-3xl text-cream-50 mb-2">TERTARIK DENGAN BIJI KOPI KAMI?</h3>
+        <p class="text-xs text-cream-300 max-w-lg mx-auto mb-6">
+            Minta sampel biji kopi Arabika Specialty atau Fine Robusta sekarang juga untuk kalibrasi di roastery Anda.
+        </p>
+        <a href="{{ url_for('sample') }}" class="btn-primary px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg">
+            <i class="fa-brands fa-whatsapp text-forest-950 text-base"></i> Ajukan Sample via WhatsApp
+        </a>
+    </div>
+</article>
+{% endblock %}

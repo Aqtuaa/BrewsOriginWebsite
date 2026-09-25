@@ -1,0 +1,222 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}{{ 'Edit Biji Kopi' if bean else 'Tambah Biji Kopi Baru' }} | Admin Brew's Origin{% endblock %}
+{% block section_name %}Formulir Karakteristik Kopi{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-6 flex items-center justify-between">
+        <div>
+            <h1 class="font-bebas text-4xl text-cream-50">
+                {{ 'EDIT KARAKTERISTIK BIJI KOPI' if bean else 'TAMBAH BIJI KOPI BARU' }}
+            </h1>
+            <p class="text-xs text-cream-300">Lengkapi parameter fisik, agronomis, dan profil sensoris cupping kopi.</p>
+        </div>
+        <a href="{{ url_for('admin_beans') }}" class="text-xs font-semibold text-cream-400 hover:text-gold-400">
+            &larr; Kembali ke Daftar
+        </a>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-forest-900 border border-forest-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
+        <form method="POST" class="space-y-6">
+            <!-- 1. Identitas Utama -->
+            <div class="border-b border-forest-800 pb-6">
+                <h3 class="font-bebas text-2xl text-gold-400 mb-4">1. IDENTITAS & ASAL KOPI</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Nama Varian Kopi <span class="text-rose-400">*</span>
+                        </label>
+                        <input type="text" name="name" required value="{{ bean.name if bean else '' }}" placeholder="Contoh: Aceh Gayo Pantan Musara Anaerobic" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Kategori Biji <span class="text-rose-400">*</span>
+                        </label>
+                        <select name="category" required class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                            <option value="Arabika" {% if bean and bean.category == 'Arabika' %}selected{% endif %}>Arabika (Specialty Grade)</option>
+                            <option value="Robusta" {% if bean and bean.category == 'Robusta' %}selected{% endif %}>Robusta (Fine Robusta Grade)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Asal / Origin Daerah <span class="text-rose-400">*</span>
+                        </label>
+                        <input type="text" name="origin" required value="{{ bean.origin if bean else '' }}" placeholder="Contoh: Takengon, Aceh Tengah" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Ketinggian Tanam (Altitude)
+                        </label>
+                        <input type="text" name="altitude" value="{{ bean.altitude if bean else '1,400 - 1,700 MASL' }}" placeholder="Contoh: 1,500 - 1,700 MASL" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Varietas Tanaman
+                        </label>
+                        <input type="text" name="variety" value="{{ bean.variety if bean else 'Typica, Bourbon, Ateng' }}" placeholder="Contoh: Ateng Super, Bourbon" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Proses & Karakteristik Sensoris -->
+            <div class="border-b border-forest-800 pb-6">
+                <h3 class="font-bebas text-2xl text-gold-400 mb-4">2. METODE PROSES & SENSORIS CUPPING</h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Metode Pasca-Panen (Process)
+                        </label>
+                        <input type="text" name="process" value="{{ bean.process if bean else 'Anaerobic Natural' }}" placeholder="Contoh: Fully Washed / Honey / Anaerobic" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Cupping Score (SCA Standard)
+                        </label>
+                        <input type="number" step="0.1" name="cupping_score" value="{{ bean.cupping_score if bean else '86.0' }}" placeholder="86.5" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                        Flavor Notes / Cupping Notes (Pisahkan dengan koma)
+                    </label>
+                    <input type="text" name="flavor_notes" value="{{ bean.flavor_notes if bean else 'Peach, Jasmine, Brown Sugar, Black Tea' }}" placeholder="Contoh: Peach, Jasmine, Brown Sugar, Dark Chocolate" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    <span class="text-[10px] text-cream-400 mt-1 block">Setiap kata yang dipisahkan koma otomatis menjadi badge visual di halaman publik.</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                        Rekomendasi Profil Roasting
+                    </label>
+                    <input type="text" name="roast_recommendation" value="{{ bean.roast_recommendation if bean else 'Light to Medium Roast' }}" placeholder="Contoh: Light to Medium (Filter & Modern Espresso)" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                </div>
+            </div>
+
+            <!-- 3. Parameter Fisik & Pengemasan Ekspor -->
+            <div class="border-b border-forest-800 pb-6">
+                <h3 class="font-bebas text-2xl text-gold-400 mb-4">3. SPESIFIKASI FISIK & SUPPLY CHAIN</h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Kadar Air (Moisture)
+                        </label>
+                        <input type="text" name="moisture" value="{{ bean.moisture if bean else '11.2%' }}" placeholder="11.2%" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Screen Size & Grade
+                        </label>
+                        <input type="text" name="screen_size" value="{{ bean.screen_size if bean else 'Screen 16-18 (Grade 1)' }}" placeholder="Screen 16-18 (Grade 1)" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Defect Rate Maksimal
+                        </label>
+                        <input type="text" name="defect_rate" value="{{ bean.defect_rate if bean else '< 1%' }}" placeholder="< 1%" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Kemasan Pengiriman
+                        </label>
+                        <input type="text" name="packaging" value="{{ bean.packaging if bean else 'GrainPro + Jute Bag 60 Kg' }}" placeholder="GrainPro + Jute Bag 60 Kg" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Minimal Order (MOQ)
+                        </label>
+                        <input type="text" name="moq" value="{{ bean.moq if bean else '1 Sak (60 Kg)' }}" placeholder="1 Sak (60 Kg)" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Estimasi Harga / Kg
+                        </label>
+                        <input type="text" name="price_estimate" value="{{ bean.price_estimate if bean else 'Rp 140.000 / Kg' }}" placeholder="Rp 140.000 / Kg" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Tahun Panen / Crop Year
+                        </label>
+                        <input type="text" name="crop_year" value="{{ bean.crop_year if bean else '2024 / 2025' }}" placeholder="2024 / 2025" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Status Ketersediaan
+                        </label>
+                        <select name="status" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                            <option value="Ready Stock" {% if bean and bean.status == 'Ready Stock' %}selected{% endif %}>Ready Stock di Warehouse</option>
+                            <option value="Limited Stock" {% if bean and bean.status == 'Limited Stock' %}selected{% endif %}>Limited Stock (Sisa Batch)</option>
+                            <option value="Incoming Harvest" {% if bean and bean.status == 'Incoming Harvest' %}selected{% endif %}>Incoming Harvest (Pre-Order)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Media & Deskripsi -->
+            <div class="space-y-4">
+                <h3 class="font-bebas text-2xl text-gold-400 mb-2">4. MEDIA & DESKRIPSI</h3>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                        Pilih Gambar atau Masukkan URL
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+                        <select id="preset-image-select" onchange="document.getElementById('image_url_input').value = this.value" class="bg-forest-950 border border-forest-800 rounded-xl px-4 py-2.5 text-xs text-cream-200 focus:outline-none">
+                            <option value="">-- Pilih dari Koleksi Aset Gambar --</option>
+                            <option value="/static/assets/coffee-beans-sacks.jpg">coffee-beans-sacks.jpg (Karung Green Bean)</option>
+                            <option value="/static/assets/slide2-plantation.jpg">slide2-plantation.jpg (Perkebunan Lereng Gunung)</option>
+                            <option value="/static/assets/slide3-processing.jpg">slide3-processing.jpg (Penjemuran Raised Beds)</option>
+                            <option value="/static/assets/slide4-farmers.jpg">slide4-farmers.jpg (Kelompok Tani Panen)</option>
+                            <option value="/static/assets/slide5-export.jpg">slide5-export.jpg (Gudang Ekspor)</option>
+                            <option value="/static/assets/slide6-quality.jpg">slide6-quality.jpg (Lab Cupping)</option>
+                            <option value="/static/assets/slide6-workflow.jpg">slide6-workflow.jpg (Sortir Tangan Biji Kopi)</option>
+                            <option value="/static/assets/slide8-partnership.jpg">slide8-partnership.jpg (Kemitraan Roastery)</option>
+                            <option value="/static/assets/coffee-landscape.jpg">coffee-landscape.jpg (Pemandangan Dataran Tinggi)</option>
+                        </select>
+                        <input type="text" id="image_url_input" name="image_url" value="{{ bean.image_url if bean else '/static/assets/coffee-beans-sacks.jpg' }}" placeholder="Path gambar" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-2.5 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                        Deskripsi Cerita & Catatan Roasting
+                    </label>
+                    <textarea name="description" rows="4" placeholder="Ceritakan keunikan mikro-iklim perkebunan, profil rasa cangkir, atau tips sangrai untuk roastery..." class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">{{ bean.description if bean else '' }}</textarea>
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <input type="checkbox" id="is_featured" name="is_featured" value="1" {% if bean and bean.is_featured %}checked{% endif %} class="rounded text-emerald-600 focus:ring-emerald-500 border-forest-700 bg-forest-950">
+                    <label for="is_featured" class="text-xs text-cream-200 cursor-pointer">
+                        <strong>Tampilkan di Beranda (Featured Coffee)</strong> &bull; Muncul di highlight teratas halaman utama.
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="pt-6 border-t border-forest-800 flex items-center justify-end gap-3">
+                <a href="{{ url_for('admin_beans') }}" class="px-5 py-3 rounded-xl text-xs font-bold text-cream-400 hover:text-cream-100 transition-colors">
+                    Batal
+                </a>
+                <button type="submit" class="btn-primary px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk text-forest-950"></i>
+                    <span>{{ 'Simpan Perubahan' if bean else 'Tambahkan ke Katalog' }}</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

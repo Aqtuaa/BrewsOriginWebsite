@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Request Sample B2B | Brew's Origin - Uji Kualitas Biji Kopi{% endblock %}
+
+{% block content %}
+<!-- Header (Hijau Tua Perkebunan) -->
+<section class="relative py-20 bg-forest-900 overflow-hidden border-b border-forest-800">
+    <div class="absolute inset-0 z-0 opacity-25">
+        <img src="{{ url_for('static', filename='assets/slide6-quality.jpg') }}" alt="Cupping Quality" class="w-full h-full object-cover">
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-xs font-semibold tracking-widest text-gold-400 uppercase">Layanan Khusus Roastery & Kafe</span>
+        <h1 class="font-bebas text-5xl sm:text-7xl text-cream-50 mt-2 mb-4 tracking-wider">
+            REQUEST COFFEE SAMPLES
+        </h1>
+        <p class="text-cream-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Kalibrasi profil sangrai dan uji sensoris kopi pilihan kami langsung di roastery Anda. Pilih varian biji kopi yang diinginkan dan pesan sampel via WhatsApp secara instan.
+        </p>
+    </div>
+</section>
+
+<!-- Main Sample Section -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <!-- Left Column: Interactive Form (7 Cols) -->
+        <div class="lg:col-span-7">
+            <div class="card-gradient rounded-3xl p-6 sm:p-8 border border-forest-800 shadow-2xl">
+                <h3 class="font-bebas text-3xl text-cream-50 mb-2">FORMULIR PERMINTAAN SAMPEL</h3>
+                <p class="text-xs text-cream-300 mb-6">
+                    Isi detail di bawah ini. Pesan resmi terformat akan tersusun otomatis untuk dikirim ke WhatsApp tim sales kami.
+                </p>
+
+                <form id="sample-request-form" class="space-y-6">
+                    <!-- 1. Pilih Biji Kopi -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">
+                            1. Pilih Varian Biji Kopi (Bisa Lebih Dari 1) <span class="text-rose-400">*</span>
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-60 overflow-y-auto pr-2 border border-forest-800/80 rounded-2xl p-3 bg-forest-950/70">
+                            {% for bean in beans %}
+                                <label class="flex items-start gap-3 p-2.5 rounded-xl bg-forest-900/90 hover:bg-forest-800/90 border border-forest-800 cursor-pointer transition-colors">
+                                    <input type="checkbox" name="selected_beans" value="{{ bean.name }}" 
+                                           class="mt-1 rounded text-emerald-600 focus:ring-emerald-500 border-forest-700 bg-forest-950"
+                                           {% if preselected_bean and preselected_bean == bean.name %}checked{% endif %}>
+                                    <div class="text-xs">
+                                        <span class="font-bold text-cream-100 block">{{ bean.name }}</span>
+                                        <span class="text-[10px] text-cream-400">{{ bean.category }} &bull; {{ bean.process }}</span>
+                                    </div>
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- 2. Format Sample -->
+                    <div>
+                        <label for="sample-format" class="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">
+                            2. Format & Ukuran Sampel <span class="text-rose-400">*</span>
+                        </label>
+                        <select id="sample-format" class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-gold-500">
+                            <option value="Green Bean 100g (Pouch)">Green Bean 100g (Standar Sample Roaster)</option>
+                            <option value="Green Bean 250g (Pouch)">Green Bean 250g (Extended Profiling)</option>
+                            <option value="Sample Roast Filter 100g">Sample Roast - Profil Filter (Light / Medium-Light)</option>
+                            <option value="Sample Roast Espresso 100g">Sample Roast - Profil Espresso (Medium / Medium-Dark)</option>
+                        </select>
+                    </div>
+
+                    <!-- 3. Profil Roastery & Kontak -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="sample-roastery" class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                                Nama Roastery / Kafe <span class="text-rose-400">*</span>
+                            </label>
+                            <input type="text" id="sample-roastery" placeholder="Contoh: Senopati Coffee Lab" required class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 placeholder-cream-400/50 focus:outline-none focus:border-gold-500">
+                        </div>
+                        <div>
+                            <label for="sample-contact" class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                                Nama PIC / Pemohon <span class="text-rose-400">*</span>
+                            </label>
+                            <input type="text" id="sample-contact" placeholder="Contoh: Rian Pratama" required class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 placeholder-cream-400/50 focus:outline-none focus:border-gold-500">
+                        </div>
+                    </div>
+
+                    <!-- 4. Nomor WhatsApp & Alamat -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="sample-phone" class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                                No. WhatsApp PIC <span class="text-rose-400">*</span>
+                            </label>
+                            <input type="tel" id="sample-phone" placeholder="Contoh: 081298765432" required class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 placeholder-cream-400/50 focus:outline-none focus:border-gold-500">
+                        </div>
+                        <div>
+                            <label for="sample-address" class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                                Kota & Alamat Pengiriman <span class="text-rose-400">*</span>
+                            </label>
+                            <input type="text" id="sample-address" placeholder="Contoh: Jakarta Selatan / Jl. Wijaya No. 12" required class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 placeholder-cream-400/50 focus:outline-none focus:border-gold-500">
+                        </div>
+                    </div>
+
+                    <!-- 5. Catatan Tambahan -->
+                    <div>
+                        <label for="sample-notes" class="block text-xs font-bold uppercase tracking-wider text-cream-200 mb-1.5">
+                            Catatan Tambahan (Opsional)
+                        </label>
+                        <textarea id="sample-notes" rows="2" placeholder="Contoh: Mohon sertakan info lot panen dan cupping sheet terbaru..." class="w-full bg-forest-950 border border-forest-800 rounded-xl px-4 py-3 text-xs text-cream-100 placeholder-cream-400/50 focus:outline-none focus:border-gold-500"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Column: Live WhatsApp Message Preview (5 Cols) -->
+        <div class="lg:col-span-5 flex flex-col justify-between">
+            <div class="sticky top-28 space-y-6">
+                
+                <!-- Live WhatsApp Preview Card -->
+                <div class="bg-forest-900 border border-emerald-500/40 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+                    <div class="flex items-center justify-between pb-4 border-b border-forest-800 mb-4">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white text-base">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-cream-100">Official Brew's Origin WhatsApp</div>
+                                <div class="text-[10px] text-emerald-400 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online B2B Support
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-[10px] text-cream-400 uppercase font-mono">Live Preview</span>
+                    </div>
+
+                    <!-- WhatsApp Message Speech Bubble -->
+                    <div class="bg-forest-950/80 border border-forest-700/80 rounded-2xl p-4 text-xs font-mono text-cream-100 whitespace-pre-wrap leading-relaxed shadow-inner max-h-72 overflow-y-auto" id="wa-preview-text">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+
+                    <!-- Direct Send Button -->
+                    <div class="mt-6">
+                        <button id="wa-submit-btn" data-wanumber="{{ config['WHATSAPP_NUMBER'] }}" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-6 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-forest-950 transition-all hover:scale-[1.02]">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Kirim Permintaan Sampel via WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="bg-forest-900/80 border border-forest-800 rounded-2xl p-5 text-xs text-cream-300 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-clock text-gold-400 mt-0.5"></i>
+                        <span><strong>Waktu Proses:</strong> Sampel disiapkan dan dikirim dalam 1-2 hari kerja via kurir ekspres.</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
+                        <span><strong>Gratis untuk Roastery Terdaftar:</strong> Roastery dan kafe dengan izin usaha mendapatkan kuota sampel gratis (hanya ongkir ditanggung pemohon).</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fa-brands fa-instagram text-pink-400 mt-0.5"></i>
+                        <span>Follow Instagram kami <a href="https://instagram.com/brewsorigin" target="_blank" rel="noopener noreferrer" class="text-gold-400 font-bold hover:underline">@brewsorigin</a> untuk update lot panen terbaru.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
